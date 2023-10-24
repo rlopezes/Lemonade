@@ -18,7 +18,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -89,6 +88,8 @@ fun LemonadeStep(modifier: Modifier = Modifier) {
 
     //Variable con el paso actual
     var step by remember { mutableStateOf(0) }
+    //Variable pulsaciones aleatorias
+    var randomTap by remember { mutableStateOf(0) }
 
     Column(
         modifier = modifier,
@@ -127,13 +128,30 @@ fun LemonadeStep(modifier: Modifier = Modifier) {
                 .border(
                     BorderStroke(2.dp, Color(105, 205, 216 ))
                 )
-                .clickable { step = (step+1) % 4 }
+                .clickable {
+                    if (randomTap == 0) {
+                        step = (step + 1) % 4
+                        if (step == 1) {
+                            randomTap = (1..3).random()
+                        }
+                    }
+                    else {
+                        randomTap--
+                    }
+
+
+                }
         )
 
         Spacer(modifier = Modifier.height(16.dp))
 
         Text(
             text = stringResource( textoPie )
+        )
+
+        Text(
+            text = step.toString() + "-" + randomTap.toString()
+
         )
     }
 }
