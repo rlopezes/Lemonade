@@ -148,11 +148,6 @@ fun LemonadeStep(modifier: Modifier = Modifier) {
         Text(
             text = stringResource( textoPie )
         )
-
-        Text(
-            text = step.toString() + "-" + randomTap.toString()
-
-        )
     }
 }
 
